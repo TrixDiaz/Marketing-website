@@ -9,11 +9,11 @@ import MorphicNavbar from "./kokonutui/morphic-navbar";
 
 const Navbar = () => {
     return (
-        <section className="border-b-2 border-[#00E5A9] py-6">
+        <section className="sticky top-0 z-50 bg-gradient-to-r from-[#f9fafb] to-[#ffffff] border-b-2 border-[#00E5A9] py-6">
             <div className="max-w-7xl mx-auto px-4 container">
                 {/* Desktop Menu */}
                 <nav className="hidden items-center justify-between lg:flex">
-                    <div className="flex items-center gap-6">
+                    <div className="flex items-center justify-center gap-6">
                         {/* Logo */}
                         <Link href="/">
                             <Image

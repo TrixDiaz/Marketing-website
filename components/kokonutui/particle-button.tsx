@@ -11,12 +11,13 @@
  */
 
 import { useState, useRef, type RefObject } from "react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { type VariantProps } from "class-variance-authority";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { MousePointerClick } from "lucide-react";
 
-interface ParticleButtonProps extends React.ComponentProps<"button"> {
+interface ParticleButtonProps extends React.ComponentProps<"button">, VariantProps<typeof buttonVariants> {
     onSuccess?: () => void;
     successDuration?: number;
 }
@@ -34,7 +35,7 @@ function SuccessParticles({
 
     return (
         <AnimatePresence>
-            {[...Array(6)].map((_, i) => (
+            {[ ...Array(6) ].map((_, i) => (
                 <motion.div
                     key={i}
                     className="fixed w-1 h-1 bg-black dark:bg-white rounded-full"
@@ -45,9 +46,9 @@ function SuccessParticles({
                         y: 0,
                     }}
                     animate={{
-                        scale: [0, 1, 0],
-                        x: [0, (i % 2 ? 1 : -1) * (Math.random() * 50 + 20)],
-                        y: [0, -Math.random() * 50 - 20],
+                        scale: [ 0, 1, 0 ],
+                        x: [ 0, (i % 2 ? 1 : -1) * (Math.random() * 50 + 20) ],
+                        y: [ 0, -Math.random() * 50 - 20 ],
                     }}
                     transition={{
                         duration: 0.6,
@@ -61,12 +62,14 @@ function SuccessParticles({
 }
 
 export default function ParticleButton({
-    children,   
+    children,
     successDuration = 1000,
     className,
+    size,
+    variant,
     ...props
 }: ParticleButtonProps) {
-    const [showParticles, setShowParticles] = useState(false);
+    const [ showParticles, setShowParticles ] = useState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -87,6 +90,8 @@ export default function ParticleButton({
             <Button
                 ref={buttonRef}
                 onClick={handleClick}
+                size={size}
+                variant={variant}
                 className={cn(
                     "relative",
                     showParticles && "scale-95",
