@@ -13,19 +13,19 @@ const navItems = {
   "/": {
     name: "home",
   },
-  "/# about-us": {
+  "/about-us": {
     name: "about us",
   },
-  "/# services": {
+  "/services": {
     name: "services",
   },
-  "/# pricing": {
+  "/pricing": {
     name: "pricing",
   },
-  "/# case-studies": {
+  "/case-studies": {
     name: "case studies",
   },
-  "/# contact-us": {
+  "/contact-us": {
     name: "contact us",
   },
 };
@@ -72,7 +72,7 @@ export function MorphicNavbar() {
                       "rounded-r-lg"
                     )
                 )}
-                href="#"
+                href={path}
                 key={path}
                 onClick={() => handleNavClick(path)}
               >

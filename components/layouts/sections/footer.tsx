@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { BackgroundPathsOverlay } from "@/components/kokonutui/background-paths";
 
 
 interface MenuItem {
@@ -69,7 +70,8 @@ const Footer = ({
     ],
 }: FooterProps) => {
     return (
-        <section className="max-w-7xl mx-auto py-24">
+        <section className="relative max-w-7xl mx-auto py-24 overflow-hidden">
+            <BackgroundPathsOverlay className="opacity-20 blur-[2px]" />
             <div className="container">
                 <footer>
                     <div className="grid grid-cols-2 gap-8 lg:grid-cols-6">
