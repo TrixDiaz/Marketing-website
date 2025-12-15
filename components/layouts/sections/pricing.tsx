@@ -30,8 +30,8 @@ const PricingSection = ({
         {
             name: "Starter Plan",
             badge: "Starter Plan",
-            monthlyPrice: "$1250",
-            yearlyPrice: "$1250",
+            monthlyPrice: "$1,250",
+            yearlyPrice: "$12,500",
             description: "Kickstart with essential tools and integrations. Ideal for small businesses and startups.",
             features: [
                 "Unlimited Integrations",
@@ -43,8 +43,8 @@ const PricingSection = ({
         {
             name: "Growth Plan",
             badge: "Growth Plan",
-            monthlyPrice: "$2500",
-            yearlyPrice: "$2500",
+            monthlyPrice: "$2,500",
+            yearlyPrice: "$25,000",
             description: "Grow with advanced support and more storage. Ideal for growing businesses and startups.",
             features: [
                 "Unlimited Integrations",
@@ -56,8 +56,8 @@ const PricingSection = ({
         {
             name: "Premium Plan",
             badge: "Premium Plan",
-            monthlyPrice: "$4500",
-            yearlyPrice: "$4500",
+            monthlyPrice: "$4,500",
+            yearlyPrice: "$50,000",
             description: "Scale with advanced support and more storage. Ideal for large businesses and startups.",
             features: [
                 "Unlimited Integrations",
@@ -78,13 +78,14 @@ const PricingSection = ({
             <div className="pointer-events-none absolute left-1/2 top-20 h-40 w-40 -translate-x-1/2 rounded-full bg-amber-100/60 blur-2xl" aria-hidden />
 
             <div className="mx-auto flex max-w-7xl flex-col gap-12 px-4 sm:px-6 lg:px-8">
-                <div className="relative mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
-                    <h2 className="text-pretty text-4xl font-bold lg:text-6xl">
-                        {title}
-                    </h2>
-                    <p className="text-muted-foreground text-lg leading-relaxed lg:text-xl">
-                        {description}
-                    </p>
+                <div className="flex flex-row justify-between items-center gap-6">
+                    <div className="flex flex-col">
+                        <p className="text-pretty font-bold text-5xl text-[#FF6900]">
+                            {title}
+                        </p>
+                        <p className="text-lg text-gray-500 max-w-xl text-balance tracking-wide">{description}</p>
+                    </div>
+
                     <div className="bg-muted/70 flex h-11 w-fit items-center rounded-md p-1 text-lg shadow-sm backdrop-blur">
                         <RadioGroup
                             defaultValue="monthly"

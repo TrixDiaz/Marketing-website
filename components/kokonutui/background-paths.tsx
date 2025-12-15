@@ -34,6 +34,11 @@ function generateAestheticPath(
     position: number,
     type: "primary" | "secondary" | "accent"
 ): string {
+    // Round coordinates to ensure consistent server/client rendering
+    const round = (num: number, decimals = 2) => {
+        return Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals);
+    };
+
     const baseAmplitude =
         type === "primary" ? 150 : type === "secondary" ? 100 : 60;
     const phase = index * 0.2;
@@ -64,8 +69,8 @@ function generateAestheticPath(
             (baseAmplitude * 0.2 * amplitudeFactor);
 
         points.push({
-            x: baseX * position,
-            y: baseY + wave1 + wave2 + wave3,
+            x: round(baseX * position),
+            y: round(baseY + wave1 + wave2 + wave3),
         });
     }
 
@@ -73,18 +78,18 @@ function generateAestheticPath(
         if (i === 0) return `M ${point.x} ${point.y}`;
         const prevPoint = points[ i - 1 ];
         const tension = 0.4;
-        const cp1x = prevPoint.x + (point.x - prevPoint.x) * tension;
-        const cp1y = prevPoint.y;
-        const cp2x = prevPoint.x + (point.x - prevPoint.x) * (1 - tension);
-        const cp2y = point.y;
+        const cp1x = round(prevPoint.x + (point.x - prevPoint.x) * tension);
+        const cp1y = round(prevPoint.y);
+        const cp2x = round(prevPoint.x + (point.x - prevPoint.x) * (1 - tension));
+        const cp2y = round(point.y);
         return `C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${point.x} ${point.y}`;
     });
 
     return pathCommands.join(" ");
 }
 
-const generateUniqueId = (prefix: string): string =>
-    `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
+const generateUniqueId = (prefix: string, index: number): string =>
+    `${prefix}-${index}`;
 
 // Memoized FloatingPaths component
 const FloatingPaths = memo(function FloatingPaths({
@@ -96,7 +101,7 @@ const FloatingPaths = memo(function FloatingPaths({
     const primaryPaths: PathData[] = useMemo(
         () =>
             Array.from({ length: 12 }, (_, i) => ({
-                id: generateUniqueId("primary"),
+                id: generateUniqueId("primary", i),
                 d: generateAestheticPath(i, position, "primary"),
                 opacity: 0.15 + i * 0.02,
                 width: 4 + i * 0.3,
@@ -109,7 +114,7 @@ const FloatingPaths = memo(function FloatingPaths({
     const secondaryPaths: PathData[] = useMemo(
         () =>
             Array.from({ length: 15 }, (_, i) => ({
-                id: generateUniqueId("secondary"),
+                id: generateUniqueId("secondary", i),
                 d: generateAestheticPath(i, position, "secondary"),
                 opacity: 0.12 + i * 0.015,
                 width: 3 + i * 0.25,
@@ -122,7 +127,7 @@ const FloatingPaths = memo(function FloatingPaths({
     const accentPaths: PathData[] = useMemo(
         () =>
             Array.from({ length: 10 }, (_, i) => ({
-                id: generateUniqueId("accent"),
+                id: generateUniqueId("accent", i),
                 d: generateAestheticPath(i, position, "accent"),
                 opacity: 0.08 + i * 0.12,
                 width: 2 + i * 0.2,
@@ -149,6 +154,7 @@ const FloatingPaths = memo(function FloatingPaths({
                 viewBox="-2400 -800 4800 1600"
                 fill="none"
                 preserveAspectRatio="xMidYMid slice"
+                suppressHydrationWarning
             >
                 <title>Background Paths</title>
                 <defs>
@@ -194,6 +200,7 @@ const FloatingPaths = memo(function FloatingPaths({
                                 },
                             }}
                             style={{ opacity: path.opacity }}
+                            suppressHydrationWarning
                         />
                     ))}
                 </g>
@@ -221,6 +228,7 @@ const FloatingPaths = memo(function FloatingPaths({
                                 },
                             }}
                             style={{ opacity: path.opacity }}
+                            suppressHydrationWarning
                         />
                     ))}
                 </g>
@@ -248,6 +256,7 @@ const FloatingPaths = memo(function FloatingPaths({
                                 },
                             }}
                             style={{ opacity: path.opacity }}
+                            suppressHydrationWarning
                         />
                     ))}
                 </g>
