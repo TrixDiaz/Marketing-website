@@ -121,7 +121,7 @@ export function MorphicNavbar() {
                   return (
                     <SheetClose asChild key={path}>
                       <Link
-                        href="#"
+                        href={path}
                         onClick={() => handleNavClick(path)}
                         className={clsx(
                           "flex items-center justify-start px-4 py-3 rounded-lg text-base font-medium capitalize transition-all duration-200",
