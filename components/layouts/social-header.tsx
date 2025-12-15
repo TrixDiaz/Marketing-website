@@ -8,7 +8,7 @@ import {
     LinkedinIcon,
 } from "lucide-react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 
 const SocialHeader = () => {
     return (
