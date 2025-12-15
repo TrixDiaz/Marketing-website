@@ -14,7 +14,7 @@ const navItems = {
     name: "home",
   },
   "/about-us": {
-    name: "about-us",
+    name: "about us",
   },
   "/services": {
     name: "services",
@@ -23,10 +23,10 @@ const navItems = {
     name: "pricing",
   },
   "/case-studies": {
-    name: "case-studies",
+    name: "case studies",
   },
   "/contact-us": {
-    name: "contact-us",
+    name: "contact us",
   },
 };
 
