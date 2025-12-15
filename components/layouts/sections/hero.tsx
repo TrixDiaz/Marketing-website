@@ -8,7 +8,7 @@ const HeroSection = () => {
         <section className="py-24 bg-gradient-to-b from-gray-100 to-white">
             <div>
                 <div className="max-w-7xl mx-auto">
-                    <div className="flex items-center justify-between">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
